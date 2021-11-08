@@ -1,0 +1,73 @@
+nov-07 21:41:11.197 [main] DEBUG nextflow.cli.Launcher - $> nextflow run demographic.nf --files_path test/data --pop1_sfs 202 --pop2_sfs 124 --pop3_sfs 152 --output_dir test/results -resume -with-report test/results/20211107_214107_report.html -with-dag test/results/20211107_214107.DAG.html
+nov-07 21:41:11.456 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 21.04.3
+nov-07 21:41:11.567 [main] INFO  nextflow.cli.CmdRun - Launching `demographic.nf` [hungry_church] - revision: 276a10a01f
+nov-07 21:41:11.698 [main] WARN  nextflow.config.ConfigBuilder - It appears you have never run this project before -- Option `-resume` is ignored
+nov-07 21:41:11.895 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; plugins-dir=/home/fermiron/.nextflow/plugins
+nov-07 21:41:11.899 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+nov-07 21:41:11.906 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins local root: .nextflow/plr/empty
+nov-07 21:41:11.928 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+nov-07 21:41:11.931 [main] INFO  org.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+nov-07 21:41:11.944 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+nov-07 21:41:11.977 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+nov-07 21:41:12.158 [main] DEBUG nextflow.Session - Session uuid: 03c88cfe-0364-47da-9720-6cfd0f06c650
+nov-07 21:41:12.159 [main] DEBUG nextflow.Session - Run name: hungry_church
+nov-07 21:41:12.167 [main] DEBUG nextflow.Session - Executor pool size: 4
+nov-07 21:41:12.285 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 21.04.3 build 5560
+  Created: 21-07-2021 15:09 UTC (10:09 CDT)
+  System: Linux 5.4.0-89-generic
+  Runtime: Groovy 3.0.7 on OpenJDK 64-Bit Server VM 11.0.11+9-Ubuntu-0ubuntu2.18.04
+  Encoding: UTF-8 (UTF-8)
+  Process: 14191@fermiron-VirtualBox [127.0.1.1]
+  CPUs: 4 - Mem: 4.8 GB (973.1 MB) - Swap: 2 GB (2 GB)
+nov-07 21:41:12.364 [main] DEBUG nextflow.Session - Work-dir: /home/fermiron/Imágenes/nf_demographic_model/work [ext2/ext3]
+nov-07 21:41:12.367 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/fermiron/Imágenes/nf_demographic_model/bin
+nov-07 21:41:12.397 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+nov-07 21:41:12.438 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+nov-07 21:41:12.792 [main] DEBUG nextflow.Session - Session start invoked
+nov-07 21:41:14.893 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+nov-07 21:41:14.987 [main] INFO  nextflow.Nextflow - 
+==========================================
+The demographic inference pipeline
+v0.1
+==========================================
+
+nov-07 21:41:14.991 [main] INFO  nextflow.Nextflow - --Nextflow metadata--
+nov-07 21:41:15.013 [main] INFO  nextflow.Nextflow - Resumed run?   : false
+Run Name       : hungry_church
+Current user   : fermiron
+Start time     : 2021-11-07T214112.495574-0600
+Script dir     : /home/fermiron/Imágenes/nf_demographic_model
+Working dir    : /home/fermiron/Imágenes/nf_demographic_model/work
+Current dir    : /home/fermiron/Imágenes/nf_demographic_model
+Launch command : nextflow run demographic.nf --files_path test/data --pop1_sfs 202 --pop2_sfs 124 --pop3_sfs 152 --output_dir test/results -resume -with-report test/results/20211107_214107_report.html -with-dag test/results/20211107_214107.DAG.html
+nov-07 21:41:15.017 [main] INFO  nextflow.Nextflow - 
+
+--Pipeline Parameters--
+nov-07 21:41:15.028 [main] INFO  nextflow.Nextflow - Input data     : 152
+Results Dir    : test/results/nf_demographic-results/
+Intermediate Dir: test/results/nf_demographic-intermediate/
+nov-07 21:41:15.029 [main] INFO  nextflow.Nextflow - ==========================================
+Pipeline Start
+nov-07 21:41:15.561 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: sfs_calculation
+nov-07 21:41:15.755 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+nov-07 21:41:15.756 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+nov-07 21:41:15.774 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+nov-07 21:41:15.789 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4.8 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+nov-07 21:41:16.102 [main] DEBUG nextflow.Session - Ignite dataflow network (6)
+nov-07 21:41:16.124 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > sfs_calculation
+nov-07 21:41:16.124 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: test/data/; pattern: *.vcf; options: [:]
+nov-07 21:41:16.131 [main] DEBUG nextflow.script.ScriptRunner - > Await termination 
+nov-07 21:41:16.135 [main] DEBUG nextflow.Session - Session await
+nov-07 21:41:16.674 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+nov-07 21:41:16.691 [Task submitter] INFO  nextflow.Session - [fb/d14298] Submitted process > sfs_calculation (1)
+nov-07 21:43:00.757 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: sfs_calculation (1); status: COMPLETED; exit: 0; error: -; workDir: /home/fermiron/Imágenes/nf_demographic_model/work/fb/d14298b83f3ad43b45546406b1efdd]
+nov-07 21:43:00.853 [Task monitor] DEBUG n.util.BlockingThreadExecutorFactory - Thread pool name=FileTransfer; maxThreads=12; maxQueueSize=36; keepAlive=1m
+nov-07 21:43:00.903 [main] DEBUG nextflow.Session - Session await > all process finished
+nov-07 21:43:01.002 [main] DEBUG nextflow.Session - Session await > all barriers passed
+nov-07 21:43:01.042 [main] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=1; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=1m 44s; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+nov-07 21:43:01.043 [main] DEBUG nextflow.trace.ReportObserver - Flow completing -- rendering html report
+nov-07 21:43:01.143 [main] DEBUG nextflow.trace.ReportObserver - Execution report summary data:
+  [{"cpuUsage":{"mean":110.6,"min":110.6,"q1":110.6,"q2":110.6,"q3":110.6,"max":110.6,"minLabel":"sfs_calculation (1)","maxLabel":"sfs_calculation (1)","q1Label":"sfs_calculation (1)","q2Label":"sfs_calculation (1)","q3Label":"sfs_calculation (1)"},"process":"sfs_calculation","mem":{"mean":497135616,"min":497135616,"q1":497135616,"q2":497135616,"q3":497135616,"max":497135616,"minLabel":"sfs_calculation (1)","maxLabel":"sfs_calculation (1)","q1Label":"sfs_calculation (1)","q2Label":"sfs_calculation (1)","q3Label":"sfs_calculation (1)"},"memUsage":null,"timeUsage":null,"vmem":{"mean":830332928,"min":830332928,"q1":830332928,"q2":830332928,"q3":830332928,"max":830332928,"minLabel":"sfs_calculation (1)","maxLabel":"sfs_calculation (1)","q1Label":"sfs_calculation (1)","q2Label":"sfs_calculation (1)","q3Label":"sfs_calculation (1)"},"reads":{"mean":47309302,"min":47309302,"q1":47309302,"q2":47309302,"q3":47309302,"max":47309302,"minLabel":"sfs_calculation (1)","maxLabel":"sfs_calculation (1)","q1Label":"sfs_calculation (1)","q2Label":"sfs_calculation (1)","q3Label":"sfs_calculation (1)"},"cpu":{"mean":110.6,"min":110.6,"q1":110.6,"q2":110.6,"q3":110.6,"max":110.6,"minLabel":"sfs_calculation (1)","maxLabel":"sfs_calculation (1)","q1Label":"sfs_calculation (1)","q2Label":"sfs_calculation (1)","q3Label":"sfs_calculation (1)"},"time":{"mean":103877,"min":103877,"q1":103877,"q2":103877,"q3":103877,"max":103877,"minLabel":"sfs_calculation (1)","maxLabel":"sfs_calculation (1)","q1Label":"sfs_calculation (1)","q2Label":"sfs_calculation (1)","q3Label":"sfs_calculation (1)"},"writes":{"mean":25600483,"min":25600483,"q1":25600483,"q2":25600483,"q3":25600483,"max":25600483,"minLabel":"sfs_calculation (1)","maxLabel":"sfs_calculation (1)","q1Label":"sfs_calculation (1)","q2Label":"sfs_calculation (1)","q3Label":"sfs_calculation (1)"}}]
+nov-07 21:43:02.649 [main] DEBUG nextflow.CacheDB - Closing CacheDB done
+nov-07 21:43:02.684 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
