@@ -49,7 +49,7 @@ def helpMessage() {
 
 	Usage:
 
-	nextflow run ${pipeline_name}.nf --files_path <path to input 1> --pop1_sfs <path to input 2> --pop2_sfs <path to input 3> --pop3_sfs <path to input 4> [--output_dir path to results ]
+	nextflow run ${pipeline_name}.nf --files_path <path to input 1> --pop1_sfs <path to input 2> --pop2_sfs <path to input 3> --pop3_sfs <path to input 4> --snp_number <path to input 5>  [--output_dir path to results ]
 
 	  --files_path	<- The path to the required files for demographic modelling
 
@@ -58,6 +58,8 @@ def helpMessage() {
 		--pop2_sfs <- Value for projecting for pop2
 
 		--pop3_sfs <- Value for projecting for pop3
+
+		--snp_number <- Number of SNPs that are going to be simulated
 
 	  --output_dir  <- directory where results, intermediate and log files will be stored;
 	      default: same dir where vcf files are
@@ -95,6 +97,7 @@ params.files_path = false // default is false to not trigger help message
 params.pop1_sfs = false
 params.pop2_sfs = false
 params.pop3_sfs = false
+params.snp_number = false
 params.help = false //default is false to not trigger help message automatically at every run
 params.version = false //default is false to not trigger version message automatically at every run
 
@@ -147,8 +150,8 @@ try {
     if it was not provided, it keeps the 'false' value assigned in the parameter initiation block above
     and this test fails
 */
-if ( !params.files_path | !params.pop1_sfs | !params.pop2_sfs | !params.pop3_sfs) {
-  log.error " Please provide the --files_path AND --pop1_sfs AND --pop2_sfs AND --pop3_sfs \n\n" +
+if ( !params.files_path | !params.pop1_sfs | !params.pop2_sfs | !params.pop3_sfs | !params.snp_number) {
+  log.error " Please provide the --files_path AND --pop1_sfs AND --pop2_sfs AND --pop3_sfs AND --snp_number \n\n" +
   " For more information, execute: nextflow run nf_demographic --help"
   exit 1
 }
@@ -205,6 +208,7 @@ pipelinesummary['Input data']			= params.files_path
 pipelinesummary['Input data']			= params.pop1_sfs
 pipelinesummary['Input data']			= params.pop2_sfs
 pipelinesummary['Input data']			= params.pop3_sfs
+pipelinesummary['Input data']			= params.snp_number
 pipelinesummary['Results Dir']		= results_dir
 pipelinesummary['Intermediate Dir']		= intermediates_dir
 /* print stored summary info */
@@ -224,14 +228,18 @@ nextflow.enable.dsl=2
 /* Load files  into channel*/
 vcf_file = Channel.fromPath("${params.files_path}/*.vcf")
 pop_file = Channel.fromPath("${params.files_path}/pop.file")
+tpl_file = Channel.fromPath("${params.files_path}/p1_p2_p3.tpl")
+est_file = Channel.fromPath("${params.files_path}/p1_p2_p3.est")
 pop1 = Channel.from("${params.pop1_sfs}" )
 pop2 = Channel.from("${params.pop2_sfs}")
 pop3 = Channel.value("${params.pop3_sfs}")
+number_snps = Channel.from("${params.snp_number}")
 
 
 /* Import modules
 */
- include {sfs_calculation} from './nf_modules/modules.nf'
+ include {sfs_calculation ; demographic_calculation
+	 ; best_likelihood; editing_file} from './nf_modules/modules.nf'
 
  /*
   * main pipeline logic
@@ -239,4 +247,7 @@ pop3 = Channel.value("${params.pop3_sfs}")
 
  workflow  {
    p1 = sfs_calculation(vcf_file, pop_file, pop1, pop2, pop3)
+	 p2 = demographic_calculation(p1, tpl_file, est_file)
+	 p3 = best_likelihood(p2)
+	 p4 = editing_file(p3, number_snps)
  }

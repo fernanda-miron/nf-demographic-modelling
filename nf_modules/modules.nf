@@ -25,3 +25,73 @@ publishDir "${results_dir}/sfs_results/", mode:"copy"
 	 --proj=${pop1_val},${pop2_val},${pop3_val} --prefix p1_p2_p3
 	"""
 }
+
+process demographic_calculation {
+
+publishDir "${results_dir}/final_par_file/", mode:"copy"
+
+	input:
+	path p1
+	file tpl_file
+	file est_file
+
+	output:
+	file "r*"
+
+	"""
+	for i in {1..10}; do
+	fsc2702 -t ${tpl_file} -n 100 -m -e ${est_file} -M -L 40 -q -s 0
+	mkdir r\$i
+	mv p1_p2_p3/* r\$i
+	mv seed.txt r\$i
+	mv p1_p2_p3.par r\$i ;done
+	"""
+}
+
+process best_likelihood {
+
+publishDir "${results_dir}/maximum_par_file/", mode:"copy"
+
+	input:
+	path p2
+
+	output:
+	path "best_likelihood/p1_p2_p3_maxL.par"
+
+	shell:
+  '''
+	for i in {1..10}; do
+	tail -n1 r\$i/p1_p2_p3.bestlhoods > results
+	echo r\$i > name
+	paste name results > r\$i.txt ;done
+
+	cat r*.txt > likelihoods
+	sort -k 6 -n likelihoods | tail -1 | cut -f1 > best_likelihood
+
+	shopt -s extglob
+	rm -R !("$(cat best_likelihood)")
+	cp -r r* ./best_likelihood
+	'''
+}
+
+process editing_file {
+
+publishDir "${results_dir}/modified_maxlpar/", mode:"copy"
+
+	input:
+	path p3
+	val no_snps
+
+	output:
+	path "final.par"
+
+	"""
+	head -n -1 ${p3} > file_1
+	echo "DNA" > chrc1
+	echo ${no_snps} > chrc2
+	echo 2.5e-8 > chrc3
+	echo OUTEXP > chrc4
+	paste chrc1 chrc2 chrc3 chrc4 > file_2
+	cat file_1 file_2 > final.par
+	"""
+}
