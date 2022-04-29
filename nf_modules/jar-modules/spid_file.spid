@@ -1,0 +1,23 @@
+# spid-file generated: Thu Apr 28 22:47:37 CDT 2022
+
+# Arlequin Parser questions
+PARSER_FORMAT=ARLEQUIN
+
+
+# VCF Writer questions
+WRITER_FORMAT=VCF
+
+# Do you want to save an additional file with reference sequences (non-ambiguity consensus sequences)?
+VCF_WRITER_REFERENCE_QUESTION=false
+# Save reference file
+VCF_WRITER_REFERENCE_FILE_QUESTION=
+# Numeric SNP data: enter the integer that codes for nucleotide G:
+VCF_WRITER_CODE_G_QUESTION=
+# Numeric SNP data: enter the integer that codes for nucleotide A:
+VCF_WRITER_CODE_A_QUESTION=
+# Numeric SNP data: enter the integer that codes for nucleotide T:
+VCF_WRITER_CODE_T_QUESTION=
+# Specify which data should be included in the VCF file:
+VCF_WRITER_DATA_TYPE_QUESTION=SNP
+# Numeric SNP data: enter the integer that codes for nucleotide C:
+VCF_WRITER_CODE_C_QUESTION=

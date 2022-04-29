@@ -244,11 +244,15 @@ pop3 = Channel.value("${params.pop3_sfs}")
 number_snps = Channel.from("${params.snp_number}")
 recombination_rate = Channel.from("${params.recombination_rate}")
 mutation_rate = Channel.from("${params.mutation_rate}")
+java_executable = Channel.fromPath("nf_modules/jar-modules/PGDSpider2-cli.jar")
+spid_file = Channel.fromPath("nf_modules/jar-modules/spid_file.spid")
+spider_xml = Channel.fromPath("nf_modules/jar-modules/spider.conf.xml")
 
 /* Import modules
 */
  include {sfs_calculation ; demographic_calculation
-	 ; best_likelihood; editing_file ; simulating_data} from './nf_modules/modules.nf'
+	 ; best_likelihood; editing_file ; simulating_data
+	 ; arp_2_vcf} from './nf_modules/modules.nf'
 
  /*
   * main pipeline logic
@@ -260,4 +264,5 @@ mutation_rate = Channel.from("${params.mutation_rate}")
 	 p3 = best_likelihood(p2)
 	 p4 = editing_file(p3, number_snps, recombination_rate, mutation_rate)
 	 p5 = simulating_data(p4)
+	 p6 = arp_2_vcf(p5, java_executable, spid_file, spider_xml)
  }

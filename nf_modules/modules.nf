@@ -110,6 +110,26 @@ publishDir "${results_dir}/simulated_data/", mode:"copy"
 	path "final/"
 
 	"""
-	fsc2709 -i ${p4} -n 100 -j 1 -m -s 0
+	fsc2709 -i ${p4} -n 100 -j 1 -m
+	"""
+}
+
+process arp_2_vcf {
+
+publishDir "${results_dir}/final_results/", mode:"copy"
+
+	input:
+	path p5
+	file jar_file
+	file spid_file
+	file spider_xml
+
+	output:
+	path "simulated_data.vcf"
+
+	"""
+	java -Xmx1024m -Xms512m -jar ${jar_file} \
+	-inputfile final/final_1_99.arp -inputformat ARLEQUIN \
+	-outputfile simulated_data.vcf -outputformat VCF -spid ${spid_file}
 	"""
 }
