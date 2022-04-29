@@ -18,10 +18,9 @@ The pipeline is built using [Nextflow](https://www.nextflow.io), a workflow tool
 By default, the pipeline currently performs the following:
 
 1. SFS calculation (`easySFS`)
-2. Ancestral annotation (`annotate.py`)
-3. Demographic model generation (`fastsimcoal2`)
-4. Neutral model data generation (`fastsimcoal2`)
-5. ARLEQUIN to VCF file (`PGDSpider`)
+2. Demographic model generation (`fastsimcoal2`)
+3. Neutral model data generation (`fastsimcoal2`)
+4. ARLEQUIN to VCF file (`PGDSpider`)
 
 ### **Requirements**
 
